@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateInvestigationsTable extends Migration
+class CreateInvestigationTagsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,10 @@ class CreateInvestigationsTable extends Migration
      */
     public function up()
     {
-        Schema::create('investigations', function (Blueprint $table) {
+        Schema::create('investigation_tags', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('investigations_id')->references('id')->on('investigations');
+            $table->foreignId('tags_id')->references('id')->on('tags');
             $table->timestamps();
         });
     }
@@ -26,6 +28,6 @@ class CreateInvestigationsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('investigations');
+        Schema::dropIfExists('investigation_tags');
     }
 }
